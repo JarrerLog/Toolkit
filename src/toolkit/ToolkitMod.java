@@ -5,7 +5,7 @@
  *   You can obtain a copy of the license at https://creativecommons.org/licenses/by-nc/4.0/legalcode
  */
 
-package raffel080108.unlocktechtreemod;
+package toolkit;
 
 import arc.Events;
 import arc.util.Log;
@@ -15,9 +15,9 @@ import mindustry.game.EventType;
 import mindustry.mod.Mod;
 import mindustry.ui.dialogs.BaseDialog;
 
-public class UnlockTechTreeMod extends Mod {
+public class ToolkitMod extends Mod {
     @SuppressWarnings("unused")
-    public UnlockTechTreeMod() {
+    public ToolkitMod() {
         Log.info("[UnlockTechTreeMod] Initializing...");
 
         Events.on(EventType.ClientLoadEvent.class, e -> {
