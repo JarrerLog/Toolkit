@@ -20,6 +20,7 @@ ext{
     mindustryVersion = 'v145'
     jabelVersion = "93fde537c7"
     sdkRoot = System.getenv("ANDROID_HOME") ?: System.getenv("ANDROID_SDK_ROOT")
+    isWindows = System.getProperty("os.name").toLowerCase().contains("windows")
 }
 
 //java 8 backwards compatibility flag
