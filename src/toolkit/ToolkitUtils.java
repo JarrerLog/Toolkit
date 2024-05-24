@@ -7,6 +7,7 @@ import mindustry.world.*;
 import java.lang.reflect.*;
 
 public class ToolkitUtils {
+    private String name = "hi";
     public static Field getField(Class clazz, String name) {
         try {
             Field field = clazz.getDeclaredField(name);
