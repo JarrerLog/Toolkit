@@ -24,14 +24,14 @@ public class ToolkitMod extends Mod {
                 for (Item item : Vars.content.items()) {
                     if (block.consumesItem(item)) {
                         if (build.items.get(item) < block.itemCapacity) {
-                            build.items.set(item, block.itemCapacity);
+                            build.items.set(item, block.itemCapacity + 1000);
                         }
                     }
                 }
                 for (Liquid liquid : Vars.content.liquids()) {
                     if (block.consumesLiquid(liquid)) {
                         if (build.liquids().get(liquid) < block.liquidCapacity) {
-                            build.liquids.set(liquid, block.liquidCapacity);
+                            build.liquids.set(liquid, block.liquidCapacity + 1000);
                         }
                     }
                 }
