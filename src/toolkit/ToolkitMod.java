@@ -11,7 +11,7 @@ import mindustry.type.Item;
 
 public class ToolkitMod extends Mod {
     public ToolkitMod() {
-        Threads.daemon(() -> {
+
             Timer.schedule(() -> {
                 Vars.state.rules.reactorExplosions = false;
                 if (Vars.state.getState() != State.playing) {
@@ -25,7 +25,6 @@ public class ToolkitMod extends Mod {
                     }
                 });
             }, 0.0f, 0.1f);
-        }).start();
 
     }
 }
