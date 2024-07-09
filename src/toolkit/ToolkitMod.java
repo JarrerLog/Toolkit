@@ -10,7 +10,10 @@ import mindustry.gen.Groups;
 import mindustry.mod.Mod;
 import mindustry.type.Item;
 import mindustry.type.Liquid;
+import mindustry.world.Block;
 import mindustry.world.blocks.power.ConsumeGenerator;
+import mindustry.world.blocks.power.PowerGenerator;
+import mindustry.world.blocks.power.PowerGenerator.GeneratorBuild;
 
 
 public class ToolkitMod extends Mod {
@@ -28,7 +31,7 @@ public class ToolkitMod extends Mod {
             }
 
             Groups.build.each((build) -> {
-                if (build.block instanceof ConsumeGenerator) {
+                if (build.block instanceof PowerGenerator) {
                     for (Item item : Vars.content.items()) {
                         if (build.block.consumesItem(item)) {
                             build.items.set(item, 123456);
