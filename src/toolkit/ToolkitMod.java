@@ -18,9 +18,8 @@ import mindustry.world.blocks.power.PowerGenerator.GeneratorBuild;
 
 public class ToolkitMod extends Mod {
     public ToolkitMod() {
-        Vars.state.rules.reactorExplosions = false;
-        Vars.mods.getScripts().runConsole("Blocks.mender.reload = 0");
-        Vars.mods.getScripts().runConsole("Blocks.mendProjector.reload = 0");
+
+
         
 
 
@@ -29,6 +28,9 @@ public class ToolkitMod extends Mod {
             if (Vars.state.getState() != State.playing) {
                 return;
             }
+            Vars.mods.getScripts().runConsole("Blocks.mender.reload = 0");
+            Vars.mods.getScripts().runConsole("Blocks.mendProjector.reload = 0");
+            Vars.state.rules.reactorExplosions = false;
 
             Groups.build.each((build) -> {
                 if (build.block instanceof PowerGenerator) {
