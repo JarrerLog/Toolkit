@@ -1,10 +1,12 @@
 package toolkit;
 
+import arc.Events;
 import arc.util.Threads;
 import arc.util.Timer;
 import mindustry.Vars;
 import mindustry.content.Blocks;
 import mindustry.core.GameState.State;
+import mindustry.game.EventType;
 import mindustry.game.Team;
 import mindustry.gen.Groups;
 import mindustry.mod.Mod;
@@ -19,7 +21,11 @@ import mindustry.world.blocks.power.PowerGenerator.GeneratorBuild;
 public class ToolkitMod extends Mod {
     public ToolkitMod() {
 
-
+        Events.on(EventType.ClientLoadEvent.class,(as) -> {
+            Vars.mods.getScripts().runConsole("Blocks.mender.reload = 0");
+            Vars.mods.getScripts().runConsole("Blocks.mendProjector.reload = 0");
+            Vars.state.rules.reactorExplosions = false;
+        });
         
 
 
@@ -28,9 +34,7 @@ public class ToolkitMod extends Mod {
             if (Vars.state.getState() != State.playing) {
                 return;
             }
-            Vars.mods.getScripts().runConsole("Blocks.mender.reload = 0");
-            Vars.mods.getScripts().runConsole("Blocks.mendProjector.reload = 0");
-            Vars.state.rules.reactorExplosions = false;
+
 
             Groups.build.each((build) -> {
                 if (build.block instanceof PowerGenerator) {
