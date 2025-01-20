@@ -1,63 +1,41 @@
 package toolkit;
 
-import arc.Events;
-import arc.util.Threads;
 import arc.util.Timer;
 import mindustry.Vars;
-import mindustry.content.Blocks;
 import mindustry.core.GameState.State;
-import mindustry.game.EventType;
-import mindustry.game.Team;
 import mindustry.gen.Groups;
 import mindustry.mod.Mod;
 import mindustry.type.Item;
 import mindustry.type.Liquid;
 import mindustry.world.Block;
-import mindustry.world.blocks.power.ConsumeGenerator;
-import mindustry.world.blocks.power.PowerGenerator;
-import mindustry.world.blocks.power.PowerGenerator.GeneratorBuild;
-
+import mindustry.world.blocks.defense.turrets.Turret;
 
 public class ToolkitMod extends Mod {
     public ToolkitMod() {
-
-        Events.on(EventType.ClientLoadEvent.class,(as) -> {
-            Vars.mods.getScripts().runConsole("Blocks.mender.reload = 0");
-            Vars.mods.getScripts().runConsole("Blocks.mendProjector.reload = 0");
-            Vars.state.rules.reactorExplosions = false;
-        });
-        
-
 
         Timer.schedule(() -> {
             Vars.state.rules.reactorExplosions = false;
             if (Vars.state.getState() != State.playing) {
                 return;
             }
-
-
             Groups.build.each((build) -> {
-                if (build.block instanceof PowerGenerator) {
-                    for (Item item : Vars.content.items()) {
-                        if (build.block.consumesItem(item)) {
-                            build.items.set(item, 123456);
-                        }
-                    }
-                    for (Liquid liq : Vars.content.liquids()) {
-                        if (build.block.consumesLiquid(liq)) {
-                            build.liquids.set(liq, 123456);
+                Block block = build.block;
+
+                for (Item item : Vars.content.items()) {
+                    if (block.consumesItem(item)) {
+                        if (build.items.get(item) < block.itemCapacity) {
+                            build.items.set(item, block.itemCapacity + 1000);
                         }
                     }
                 }
-            });
-            Groups.player.each((player) -> {
-                if (player.team() == Team.sharded) {
-                    for (Item item : Vars.content.items()) {
-                        Vars.state.teams.cores(player.team()).first().items.set(item, Vars.state.teams.cores(player.team()).first().storageCapacity);
+                for (Liquid liquid : Vars.content.liquids()) {
+                    if (block.consumesLiquid(liquid)) {
+                        if (build.liquids().get(liquid) < block.liquidCapacity) {
+                            build.liquids.set(liquid, block.liquidCapacity + 1000);
+                        }
                     }
                 }
             });
         }, 0.0f, 0.1f);
-
     }
 }
