@@ -8,7 +8,6 @@ import mindustry.mod.Mod;
 import mindustry.type.Item;
 import mindustry.type.Liquid;
 import mindustry.world.Block;
-import mindustry.world.blocks.defense.turrets.Turret;
 
 public class ToolkitMod extends Mod {
     public ToolkitMod() {
@@ -30,7 +29,7 @@ public class ToolkitMod extends Mod {
                 }
                 for (Liquid liquid : Vars.content.liquids()) {
                     if (block.consumesLiquid(liquid)) {
-                        if (build.liquids().get(liquid) < block.liquidCapacity) {
+                        if (build.liquids.get(liquid) < block.liquidCapacity) {
                             build.liquids.set(liquid, block.liquidCapacity + 1000);
                         }
                     }
